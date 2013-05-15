@@ -1,3 +1,7 @@
+rentalSize = if Modernizr.touch then 12 else 8
+busSize = 3.5
+busClusterSize = 5
+
 trackEvent = (name, values, callback = null) ->
   mixpanel.track name, values
   if callback
@@ -229,14 +233,14 @@ if Modernizr.svg and Modernizr.inlinesvg
   
         # retained markers are updated
         marker.select('circle')
-        .attr('r', (cluster) -> if cluster.length > 1 then 5 else 3.5)
+        .attr('r', (cluster) -> if cluster.length > 1 then busClusterSize else busSize)
         .attr("text", @representCluster)
   
         # new markers are added
         marker.enter().append("g")
         .append("circle")
         .attr("class", "stop no-tip")
-        .attr('r', (cluster) -> if cluster.length > 1 then 5 else 3.5)
+        .attr('r', (cluster) -> if cluster.length > 1 then busClusterSize else busSize)
         .attr("text", @representCluster)
   
         # old markers are removed
@@ -366,10 +370,10 @@ if Modernizr.svg and Modernizr.inlinesvg
       marker = @selector.selectAll("g").data(rentals).enter().append("g").attr("transform", @transform)
       marker.append("rect")
       .attr("class", @rentalClass)
-      .attr("x", -8/2)
-      .attr("y", -8/2)
-      .attr('height', 8)
-      .attr('width', 8)
+      .attr("x", -1 * rentalSize /2)
+      .attr("y", -1 * rentalSize /2)
+      .attr('height', rentalSize)
+      .attr('width', rentalSize)
       .attr("text", (rental) =>
         @setListingDisplay(rental)
       )
