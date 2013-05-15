@@ -566,7 +566,7 @@
         })();
         output = "";
         if (rental.image_url) {
-          output = output + "<a href=\"" + rental.url + "\" target=\"_blank\" onClick=\"recordOutboundLink(this, 'Outbound Links', {\"source\":\"" + rental.source + "\", \"url\":\"" + rental.url + "\"})\"><img class=\"rental-img\" src=\"" + rental.image_url + "\"></a>";
+          output = output + "<a href=\"" + rental.url + "\" target=\"_blank\" onClick=\"recordOutboundLink(this, 'Outbound Links', {\"source\":\"" + rental.source + "\", \"url\":\"" + rental.url + "\", \"price\":\"" + rental.url + "\", \"bedrooms\":\"" + rental.bedrooms + "\"})\"><img class=\"rental-img\" src=\"" + rental.image_url + "\"></a>";
         }
         output = output + rental.source + ", " + rental.type + " <br/><ul>" + listings.join("") + "</ul><br /><a href=\"" + rental.url + "\" target=\"_blank\" onClick=\"recordOutboundLink(this, 'Outbound Links', {'source':'" + rental.source + "', 'url':'" + rental.url + "'});return false;\">View Original Listing</a>";
         return output;
@@ -590,6 +590,8 @@
           return trackEvent('Rental View', {
             "Rental Source": rental.source,
             "url": rental.url,
+            "price": rental.price,
+            "bedrooms": rental.bedrooms,
             "min price": priceRange[0],
             "max price": priceRange[1],
             "min rooms": roomsRange[0],
