@@ -26,6 +26,8 @@ window.setVariable = setVariable
 if Modernizr.svg and Modernizr.inlinesvg
   if $(window).height() < 500 or $(window).width() < 500
     $(".desktop").hide()
+  if !($(window).width() < 600 or $.cookie("survey-closed") or $.cookie("survey-visited"))
+    $(".message").show()
   if Modernizr.touch
     $(".github").hide()
     
@@ -511,6 +513,19 @@ if Modernizr.svg and Modernizr.inlinesvg
   
   $(window).unload( () ->
     trackEvent('RentalMap closed')
+  )
+  
+  $(".message .close").on("click", () ->
+    $(".message").hide()
+    $.cookie("survey-closed",true, { expires: 5 })
+    trackEvent('Survey Closed')
+  )
+  
+  $(window).on("resize", () ->
+    if $(window).width() < 600
+      $(".message").hide()
+    else
+      $(".message").show()
   )
   
   addthis.addEventListener('addthis.menu.share', (evt) ->
