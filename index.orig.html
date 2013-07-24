@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-    <title>Rentals in Victoria BC</title>
+    <title>Victoria BC - Rental Map</title>
     
     <meta name="description" content="Mapping rental apartments, suites and roommates in the Victoria BC Area to help members of Victoria and UVic find homes.">
 
@@ -68,6 +68,12 @@ mixpanel.init("8bfd01d8432bfd40e02b37b0bbc490bc");</script><!-- end Mixpanel -->
 	      <div class="shared">Shared/Roommate: <input type="checkbox" id="show-shared"/></div>
       </div>
       <div class="header-expand"></div>
+  </div>
+  
+  <div class="message">
+  	Want to help us improve?<button class="close">&times;</button><br />
+  	Tell us about your rental experiences<br />
+  	<a class="btn" href="http://survey.rentalmap.co/index.php/886472/lang-en" target="_blank" onclick="$.cookie('survey-visited',true, { expires: 365 }); trackEvent('Survey Visited')">Take the survey</a>
   </div>
   
   <div id="unsupportedBrowser" class="alert alert-block alert-error" style="display:none;">
