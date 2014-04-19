@@ -15,7 +15,7 @@ Frontend for Rentals for UVic Students Visualization
 
 Shows apartments and rooms for rent in Victoria, BC, together with bus routes to UVic.
 
-http://victoria.rentalmap.co/
+http://victoria.rentalmap.jamiestarke.com/
 
 Credit to
 ---------
