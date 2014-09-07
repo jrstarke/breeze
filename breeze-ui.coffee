@@ -1,6 +1,13 @@
 rentalSize = if Modernizr.touch then 12 else 8
 busSize = 3.5
 busClusterSize = 5
+  
+injectLocations = (stops,points) ->  
+  stops.forEach((stop) ->
+    location = points[stop.p]
+    stop.lat = location.lat
+    stop.lon = location.lon  
+  )
 
 trackEvent = (name, values, callback = null) ->
   mixpanel.track name, values
@@ -201,15 +208,10 @@ if Modernizr.svg and Modernizr.inlinesvg
     svgLine = d3.svg.line().x((d) -> d.x).y((d) -> d.y).interpolate("linear")
 
     update: () -> @selector.selectAll("path").attr("d", (d) => @line(d))
-    addRoutes: (routes, stops) ->
+    addRoutes: (routes,points) ->
       # TODO prevent overplotting by intelligently selecting route segments between stops
       # map stops by their id
-      stopsById = {}
-      stops.forEach((stop) ->
-        stopsById[stop.id] = stop
-      )
-
-      @line = (route) -> svgLine(route.stops.map((routeStop) => @map.locationPoint(stopsById[routeStop.point_id])))
+      @line = (route) -> svgLine(route.map((routePoint) => @map.locationPoint(points[routePoint])))
       @selector.selectAll("g").data(routes).enter().append("path").attr("class", "route").attr("d", (d) => @line(d))
 
   class BusStopLayer extends Layer
@@ -492,8 +494,14 @@ if Modernizr.svg and Modernizr.inlinesvg
 
   loadBusRoutes = () ->
     d3.json 'data/uvic_transit.json', (json) ->
+      points = {}
+      json.points.forEach((point) ->
+        points[point.id] = point
+      )
+      
+      injectLocations json.stops,points
       distanceLayer.addStops json.stops
-      busRouteLayer.addRoutes json.routes,json.stops
+      busRouteLayer.addRoutes json.routes,points
       busStopLayer.addStops json.stops
 
   loadRentals = () ->
