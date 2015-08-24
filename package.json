@@ -16,7 +16,7 @@
   "scripts": {
     "build": "npm run compile && npm run minify && npm run copy-statics && npm run inject-minified",
     "compile": "coffee -o bin -c breeze-ui.coffee",
-    "minify": "uglifyjs bin/breeze-ui.js -o bin/breeze-ui.min.js && cleancss -o bin/breeze-ui.min.css breeze-ui.css && html-minifier --remove-comments --collapse-whitespace --minify-js --minify-css -o bin/index.html index.orig.html",
+    "minify": "uglifyjs bin/breeze-ui.js -o bin/breeze-ui.min.js && cleancss -o bin/breeze-ui.min.css breeze-ui.css && html-minifier --remove-comments --collapse-whitespace --minify-js --minify-css -o bin/index.html index.html",
     "inject-minified": "sed -i '' 's/breeze-ui.css/breeze-ui.min.css/' bin/index.html",
     "copy-statics": "cp -r lib data bin",
     "clean": "rm -r bin"
