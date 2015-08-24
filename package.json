@@ -1,0 +1,30 @@
+{
+  "name": "breeze",
+  "description": "A web frontend for showing rentals and transit routes on a map.",
+  "version": "1.3.0",
+  "contributors": [
+    {
+      "name": "Lars Grammel",
+      "url": "http://larsgrammel.de"
+    },
+    {
+      "name": "Jamie Starke",
+      "url": "http://www.jamiestarke.com"
+    }
+  ],
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "npm run compile && npm run minify && npm run copy-statics && npm run inject-minified",
+    "compile": "coffee -o bin -c breeze-ui.coffee",
+    "minify": "uglifyjs bin/breeze-ui.js -o bin/breeze-ui.min.js && cleancss -o bin/breeze-ui.min.css breeze-ui.css && html-minifier --remove-comments --collapse-whitespace --minify-js --minify-css -o bin/index.html index.orig.html",
+    "inject-minified": "sed -i '' 's/breeze-ui.css/breeze-ui.min.css/' bin/index.html",
+    "copy-statics": "cp -r lib data bin",
+    "clean": "rm -r bin"
+  },
+  "devDependencies": {
+    "clean-css": "^3.3.9",
+    "coffee-script": "*",
+    "html-minifier": "^0.7.2",
+    "uglify-js": "*"
+  }
+}
