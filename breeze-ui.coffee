@@ -437,7 +437,7 @@ if Modernizr.svg and Modernizr.inlinesvg
       max: 2500
       slide: (event, ui) -> sliderChanged(ui.value)
       stop: (event, ui) -> trackEvent 'distance changed'
-        distance: distanceLayer.distanceInMeters()
+      distance: distanceLayer.distanceInMeters()
     )
 
     sliderChanged($("#slider-distance-element").slider("value"))
@@ -457,8 +457,8 @@ if Modernizr.svg and Modernizr.inlinesvg
       max: 3000
       slide: (event, ui) -> sliderChanged(ui.values)
       stop: (event, ui) -> trackEvent 'price changed'
-        'low price': rentalLayer.priceRange()[0]
-        'high price': rentalLayer.priceRange()[1]
+      'low price': rentalLayer.priceRange()[0]
+      'high price': rentalLayer.priceRange()[1]
     )
 
     sliderChanged($("#slider-price-element").slider("values"))
@@ -477,8 +477,8 @@ if Modernizr.svg and Modernizr.inlinesvg
       max: 5
       slide: (event, ui) -> sliderChanged(ui.values)
       stop: (event, ui) -> trackEvent '# rooms changed'
-        'min rooms': rentalLayer.roomsRange()[0]
-        'max rooms': rentalLayer.roomsRange()[1]
+      'min rooms': rentalLayer.roomsRange()[0]
+      'max rooms': rentalLayer.roomsRange()[1]
     )
 
     sliderChanged($("#slider-rooms-element").slider("values"))
